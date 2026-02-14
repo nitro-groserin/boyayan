@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ぼややん</title>
+<style>
+  body {
+    background-color: #111;
+    color: #fff;
+    font-family: 'Arial', sans-serif;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+  }
+
+  .input-area {
+    width: 100%;
+    max-width: 600px;
+    margin-bottom: 20px;
+  }
+
+  textarea {
+    width: 100%;
+    padding: 10px;
+    font-size: 1.2rem;
+    border-radius: 8px;
+    border: none;
+    outline: none;
+    resize: none;
+  }
+
+  .hint {
+    color: #aaa;
+    margin-bottom: 5px;
+  }
+
+  .feed {
+    width: 100%;
+    max-width: 600px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .post {
+    background-color: #222;
+    padding: 10px;
+    border-radius: 8px;
+    word-wrap: break-word;
+  }
+</style>
+</head>
+<body>
+  <div class="input-area">
+    <div class="hint">ぼやいて入力してEnterで投稿</div>
+    <textarea id="murmurInput" placeholder="ここにぼややん…"></textarea>
+  </div>
+
+  <div class="feed" id="feed"></div>
+
+  <script>
+    const input = document.getElementById('murmurInput');
+    const feed = document.getElementById('feed');
+
+    input.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter' && !e.shiftKey) {
+        e.preventDefault(); // 改行を防ぐ
+        const text = input.value.trim();
+        if (text !== '') {
+          const post = document.createElement('div');
+          post.className = 'post';
+          post.textContent = text;
+          feed.prepend(post); // 上に追加
+          input.value = ''; // 入力欄をクリア
+        }
+      }
+    });
+  </script>
+</body>
+</html>
+
+
+
+
+
+
